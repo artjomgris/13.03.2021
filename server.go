@@ -52,11 +52,13 @@ func HandleConnection(conn net.Conn) {
 			if err != nil {
 				panic(err)
 			}
+			fmt.Println(action.Act)
 			if len(action.Act) < 4 {
-				fmt.Println("update")
+				conn.Write([]byte("update"))
+			} else {
+				conn.Write([]byte(action.Act))
 			}
 
-			fmt.Println(action)
 			data = data[i+2:]
 			i = 0
 		} else {
@@ -67,9 +69,7 @@ func HandleConnection(conn net.Conn) {
 	if err != nil {
 		panic(err)
 	}
-	fmt.Println(action)
-
-	conn.Write([]byte("Connection established"))
+	conn.Write([]byte(action.Act))
 
 	conn.Close()
 }

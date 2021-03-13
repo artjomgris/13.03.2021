@@ -25,6 +25,7 @@ func main() {
 	}
 	defer conn.Close()
 	var data []byte
+	var i = 0
 	for {
 		var inp Action
 		in := bufio.NewReader(os.Stdin)
@@ -51,6 +52,7 @@ func main() {
 			//fmt.Println(string(form))
 			data = append(data, form...)
 		}
+		i++
 		fmt.Println("Enter stop to stop or Press \"enter\" to continue")
 		var cont string
 		fmt.Fscanf(in, "%v\n", &cont)
@@ -63,7 +65,7 @@ func main() {
 	conn.Write(data)
 
 	buf := make([]byte, 2000)
-	for {
+	for j := 0; j < i; j++ {
 		n, err := conn.Read(buf)
 		if err != nil {
 			panic(err)
