@@ -63,11 +63,12 @@ func main() {
 	conn.Write(data)
 
 	buf := make([]byte, 2000)
-
-	n, err := conn.Read(buf)
-	if err != nil {
-		panic(err)
+	for {
+		n, err := conn.Read(buf)
+		if err != nil {
+			panic(err)
+		}
+		fmt.Println(string(buf[:n]))
 	}
 
-	fmt.Println(string(buf[:n]))
 }

@@ -69,7 +69,7 @@ func HandleConnection(conn net.Conn) {
 	}
 	fmt.Println(action)
 
-	conn.Write([]byte("Connection great"))
+	conn.Write([]byte("Connection established"))
 
 	conn.Close()
 }
